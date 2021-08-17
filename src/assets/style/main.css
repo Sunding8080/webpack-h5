@@ -1,0 +1,15 @@
+@import url('./test.less');
+@import url('./test2.scss');
+@import url('./test3.styl');
+
+.lg {
+  color: red;
+}
+
+.lg-2 {
+  width: 120px;
+  display: inline-block;
+  color: green;
+  border-radius: 10px;
+  transform: translate(100%, 0, 0);
+}

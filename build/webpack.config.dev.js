@@ -1,0 +1,36 @@
+const merge = require('webpack-merge').default
+const baseWebpackConfig = require('./webpack.config.base')
+const path = require('path')
+const apiMocker = require('mocker-api')
+
+const RUN_PROXY = Boolean(process.env.RUN_PROXY) // 判断是否用代理
+
+const webpackConfig = merge(baseWebpackConfig, {
+  devServer: {
+    open: true, // 启用服务时打开浏览器
+    host: 'local-ipv4', // 用ip4启动服务
+    liveReload: false, // 关掉自动刷新。使用热重载
+    port: 8080, // 端口
+
+    historyApiFallback: {
+      rewrites: [{ from: /.*/, to: '/' }],
+    }, // 当使用 History API时异常，跳转重定向
+
+    proxy: RUN_PROXY
+      ? {
+          '/test_api': {
+            changeOrigin: true, // 代理时会保留主机头的来源
+            target: 'http://localhost:3000',
+            pathRewrite: { '^/test_api': '' },
+          },
+        }
+      : {},
+
+    onBeforeSetupMiddleware(params) {
+      const { app } = params
+      apiMocker(app, path.resolve(__dirname, '../mock/mocker.js'))
+    }, // devServer 内部的所有中间件执行之前
+  },
+})
+
+module.exports = webpackConfig
