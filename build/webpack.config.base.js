@@ -130,6 +130,6 @@ module.exports = {
       chunkFilename: 'assets/style/styles.[contenthash:8].css', //把css文件单独打包
     }),
 
-    new TerserPlugin()
+    new TerserPlugin(),
   ],
 }

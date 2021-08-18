@@ -2,10 +2,12 @@ const merge = require('webpack-merge').default
 const baseWebpackConfig = require('./webpack.config.base')
 const path = require('path')
 const apiMocker = require('mocker-api')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const RUN_PROXY = Boolean(process.env.RUN_PROXY) // 判断是否用代理
+const isDevEslint = Boolean(process.env.RUN_ESLINT) // 开发时开启eslint校验
 
-const webpackConfig = merge(baseWebpackConfig, {
+const devWebpackConfig = {
   devServer: {
     open: true, // 启用服务时打开浏览器
     host: 'local-ipv4', // 用ip4启动服务
@@ -27,10 +29,20 @@ const webpackConfig = merge(baseWebpackConfig, {
       : {},
 
     onBeforeSetupMiddleware(params) {
-      const { app } = params
-      apiMocker(app, path.resolve(__dirname, '../mock/mocker.js'))
+      if (!RUN_PROXY) {
+        const { app } = params
+        apiMocker(app, path.resolve(__dirname, '../mock/mocker.js'))
+      }
     }, // devServer 内部的所有中间件执行之前
   },
-})
+
+  plugins: [],
+}
+
+if (isDevEslint) {
+  devWebpackConfig.plugins.push(new ESLintPlugin())
+}
+
+const webpackConfig = merge(baseWebpackConfig, devWebpackConfig)
 
 module.exports = webpackConfig
