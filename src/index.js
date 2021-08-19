@@ -3,6 +3,7 @@ console.log('processEnv:', processEnv)
 
 const info = {
   name: "sunding",
+  sex: "man",
   age: 27,
 }
 
