@@ -15,7 +15,7 @@
     "build": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.js",
     "eslint": "eslint ./src/**/*.js",
     "lint": "eslint ./src/**/*.js --fix",
-    "prepare": "husky install"
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -57,7 +57,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
-    "husky": "^7.0.1",
+    "husky": "4",
     "react": "^17.0.2",
     "react-router": "^5.2.0",
     "webpack-dev-server": "^4.0.0-rc.0"
