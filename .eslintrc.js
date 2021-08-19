@@ -11,7 +11,11 @@ module.exports = {
     node: true,
     es6: true,
   },
-  extends: ['eslint:recommended', 'airbnb-base'],
+  extends: [
+    'eslint:recommended',
+    'airbnb-base',
+    // 'prettier'
+  ],
   settings: {
     'import/resolver': {
       webpack: {
