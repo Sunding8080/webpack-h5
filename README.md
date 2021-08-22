@@ -26,9 +26,17 @@ yarn build:dev
 # 生产环境：打包代码
 yarn build
 
+#
+
 # 使用eslint校验src文件夹下的js文件
 yarn eslint
 
-# 使用eslint校验、格式化src文件夹下的js文件
+# 使用eslint修复校验src文件夹下的js文件
+yarn eslint:fix
+
+# 使用prettier修复校验src文件夹下的css、json等文件
+yarn prettier
+
+# 使用eslint修复src文件夹下js，使用prettier修复校验src文件夹下的css、json等文件
 yarn lint
 ```
