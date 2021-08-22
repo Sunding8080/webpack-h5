@@ -71,6 +71,10 @@
     "src/**/*.js": [
       "eslint --fix",
       "git add ."
+    ],
+    "src/**/*.{css,.less,.scss,.sass,.json}": [
+      "prettier --write",
+      "git add ."
     ]
   }
 }
