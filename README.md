@@ -26,7 +26,8 @@ yarn build:dev
 # 生产环境：打包代码
 yarn build
 
-#
+# 分析打包文件构建
+yarn analyse
 
 # 使用eslint校验src文件夹下的js文件
 yarn eslint
