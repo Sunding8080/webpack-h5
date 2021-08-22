@@ -15,7 +15,8 @@
     "build": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.js",
     "analyse": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.analyse.js",
     "eslint": "eslint ./src/**/*.js",
-    "lint": "eslint ./src/**/*.js --fix"
+    "lint": "eslint ./src/**/*.js --fix",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -64,7 +65,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint-staged"
     }
   },
   "lint-staged": {
