@@ -4,8 +4,8 @@ const path = require('path')
 const apiMocker = require('mocker-api')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
-const RUN_PROXY = Boolean(process.env.RUN_PROXY) // 判断是否用代理
-const isDevEslint = Boolean(process.env.RUN_ESLINT) // 开发时开启eslint校验
+const isProxy = Boolean(process.env.RUN_PROXY) // 判断是否用代理
+const isEslint = Boolean(process.env.RUN_ESLINT) // 开发时开启eslint校验
 
 const devWebpackConfig = {
   devServer: {
@@ -18,7 +18,7 @@ const devWebpackConfig = {
       rewrites: [{ from: /.*/, to: '/' }],
     }, // 当使用 History API时异常，跳转重定向
 
-    proxy: RUN_PROXY
+    proxy: isProxy
       ? {
           '/test_api': {
             changeOrigin: true, // 代理时会保留主机头的来源
@@ -29,7 +29,7 @@ const devWebpackConfig = {
       : {},
 
     onBeforeSetupMiddleware(params) {
-      if (!RUN_PROXY) {
+      if (!isProxy) {
         const { app } = params
         apiMocker(app, path.resolve(__dirname, '../mock/mocker.js'))
       }
@@ -39,7 +39,7 @@ const devWebpackConfig = {
   plugins: [],
 }
 
-if (isDevEslint) {
+if (isEslint) {
   devWebpackConfig.plugins.push(new ESLintPlugin())
 }
 

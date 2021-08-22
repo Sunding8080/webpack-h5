@@ -13,6 +13,7 @@
     "dev:proxy:eslint": "cross-env RUN_ENV=local RUN_ESLINT=true RUN_PROXY=true webpack serve --config=./build/webpack.config.dev.js",
     "build:dev": "cross-env RUN_ENV=development webpack build --config=./build/webpack.config.prod.js",
     "build": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.js",
+    "analyse": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.analyse.js",
     "eslint": "eslint ./src/**/*.js",
     "lint": "eslint ./src/**/*.js --fix"
   },
@@ -49,6 +50,7 @@
     "stylus-loader": "^6.1.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.47.1",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2",
     "webpack-merge": "^5.8.0"
   },
@@ -57,8 +59,7 @@
     "dayjs": "^1.10.6",
     "husky": "4",
     "lint-staged": "10.2.9",
-    "react": "^17.0.2",
-    "react-router": "^5.2.0",
+    "prettier": "^2.3.2",
     "webpack-dev-server": "^4.0.0-rc.0"
   },
   "husky": {
@@ -69,6 +70,10 @@
   "lint-staged": {
     "src/**/*.js": [
       "eslint --fix",
+      "git add ."
+    ],
+    "src/**/*.{css, less, scss, sass, json}": [
+      "prettier --write",
       "git add ."
     ]
   }
