@@ -5,6 +5,3 @@ console.log('processEnv:', processEnv)
 if (module && module.hot) {
   module.hot.accept()
 }
-
-
-
