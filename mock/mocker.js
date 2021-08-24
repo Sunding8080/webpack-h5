@@ -2,29 +2,38 @@ const delay = require('mocker-api/lib/delay')
 
 const proxy = {
   'GET /api/user': {
-    name: 'sunding',
-    age: 27,
+    code: 0,
+    data: {
+      name: 'sunding',
+      age: 27,
+    },
   },
 
-  'POST /api/user/list': [
-    {
-      id: 1,
-      username: 'kenny',
-      sex: 6,
-    },
-    {
-      id: 2,
-      username: 'kenny',
-      sex: 6,
-    },
-  ],
+  'POST /api/user/list': {
+    code: 0,
+    data: [
+      {
+        id: 1,
+        username: 'kenny',
+        sex: 6,
+      },
+      {
+        id: 2,
+        username: 'kenny',
+        sex: 6,
+      },
+    ],
+  },
 
   'GET /api/:owner/:id': (req, res) => {
     const { owner, id } = req.params
     return res.json({
-      id,
-      owner,
-      path: req.params[0],
+      code: 0,
+      data: {
+        id,
+        owner,
+        path: req.params[0],
+      },
     })
   },
 
