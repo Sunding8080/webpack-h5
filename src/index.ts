@@ -3,6 +3,9 @@ import request from 'assets/js/request'
 /* eslint-disable-next-line */
 console.log('processEnv:', processEnv)
 
+const name = 'sunding'
+console.log(name)
+
 request({
   method: 'get',
   url: '/api/user',
