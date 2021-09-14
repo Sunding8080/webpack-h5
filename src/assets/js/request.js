@@ -8,46 +8,32 @@ const instance = axios.create({
   },
 })
 
-let inited = false
+/**
+ * 修改请求配置
+ */
+instance.interceptors.request.use((config) => {
+  return config
+})
 
-const initRequest = () => {
-  if (inited) {
-    return
-  }
+/**
+ * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
+ */
+instance.interceptors.response.use(
+  (response) => {
+    if (response.status === 200) {
+      return response
+    }
+    return Promise.reject(response)
+  },
+  (error) => Promise.reject(error)
+)
 
-  // instance.interceptors.request.use(function (config) {
-  //   return config;
-  // });
-
-  instance.interceptors.response.use(
-    (response) => {
-      if (response.status === 200) {
-        return response
-      }
-      return Promise.reject(response)
-    },
-    async (error) => Promise.reject(error),
-  )
-
-  inited = true
-}
-
-const request = async (params) => {
-  initRequest()
-
-  return instance.request(params).then((rs) => {
+const request = (params) =>
+  instance.request(params).then((rs) => {
     if (rs.data && rs.data.code === 0) {
       return rs.data.data
     }
-
-    // 做个兼容
-    const data = rs.data || {}
-    data.toString = function toString() {
-      return data.msg || ''
-    }
-
-    return Promise.reject(data)
+    return Promise.reject(rs.data)
   })
-}
 
 export default request
