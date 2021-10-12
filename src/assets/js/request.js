@@ -19,21 +19,24 @@ instance.interceptors.request.use((config) => {
  * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
  */
 instance.interceptors.response.use(
-  (response) => {
-    if (response.status === 200) {
-      return response
+  (res) => {
+    const { status, data } = res
+    if (status === 200) {
+      if (data?.code !== 0) {
+        console.log('请求异常')
+      }
+      return data
+    } else {
+      console.log('服务异常')
+      return Promise.reject(status)
     }
-    return Promise.reject(response)
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.log('网路异常')
+    Promise.reject(error)
+  }
 )
 
-const request = (params) =>
-  instance.request(params).then((rs) => {
-    if (rs.data && rs.data.code === 0) {
-      return rs.data.data
-    }
-    return Promise.reject(rs.data)
-  })
+const request = (params) => instance.request(params)
 
 export default request
