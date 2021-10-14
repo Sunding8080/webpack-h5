@@ -1,6 +1,4 @@
-import axios from 'axios'
-
-console.log('axios, processEnv:', processEnv)
+import axios, { AxiosError } from 'axios'
 
 const createInstance = () => {
   const instance = axios.create({
@@ -14,7 +12,13 @@ const createInstance = () => {
   /**
    * 修改请求配置
    */
-  instance.interceptors.request.use((config) => config)
+  instance.interceptors.request.use(
+    (config) => config,
+    (error: AxiosError) => {
+      console.log(error)
+      Promise.reject(error)
+    }
+  )
 
   /**
    * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
@@ -32,12 +36,12 @@ const createInstance = () => {
       console.log('服务异常')
       return Promise.reject(status)
     },
-    (error) => {
+    (error: AxiosError) => {
       // 请求超时或者404时
       const { message } = error
       console.log(message)
       Promise.reject(error)
-    },
+    }
   )
 
   return instance

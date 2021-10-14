@@ -1,4 +1,4 @@
-const navigator = window.navigator
+const { navigator } = window
 
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
   navigator.userAgent,
@@ -18,11 +18,11 @@ function getIOSVersion() {
   if (ua.indexOf('like mac os x') > 0) {
     const reg = /os [\d._]+/gi
     const vInfo = ua.match(reg)
-    version = (`${vInfo}`).replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.') // 得到版本号9.3.2或者9.0
-    version = version.split('.')[0] // 得到版本号第一位
+    version = `${vInfo}`.replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.') // 得到版本号9.3.2或者9.0
+    version = version?.split('.')?.[0] // 得到版本号第一位
   }
 
-  return +version || null
+  return +version
 }
 
 /**
@@ -35,11 +35,11 @@ function getAndroidVersion() {
   if (ua.indexOf('android') > 0) {
     const reg = /android [\d._]+/gi
     const vInfo = ua.match(reg)
-    const versionStr = (`${vInfo}`).replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.') // 得到版本号4.2.2
-    version = versionStr.split('.')[0] // 得到版本号第一位
+    version = `${vInfo}`.replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.') // 得到版本号4.2.2
+    version = version?.split('.')?.[0] // 得到版本号第一位
   }
 
-  return +version || null
+  return +version
 }
 
 export {

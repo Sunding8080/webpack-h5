@@ -34,8 +34,12 @@ module.exports = {
       {
         js: 'never',
         json: 'never',
+        ts: 'never',
       },
     ],
+
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
   globals: {
     processEnv: 'readonly',
