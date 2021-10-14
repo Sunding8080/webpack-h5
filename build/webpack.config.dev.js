@@ -45,7 +45,11 @@ const devWebpackConfig = {
 }
 
 if (isEslint) {
-  devWebpackConfig.plugins.push(new ESLintPlugin())
+  devWebpackConfig.plugins.push(
+    new ESLintPlugin({
+      extensions: ['js', 'ts'],
+    })
+  )
 }
 
 const webpackConfig = merge(baseWebpackConfig, devWebpackConfig)
