@@ -16,8 +16,8 @@
     "build:dev": "cross-env RUN_ENV=development webpack build --config=./build/webpack.config.prod.js",
     "build": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.js",
     "analyse": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.analyse.js",
-    "eslint": "eslint ./src/**/*.js",
-    "eslint:fix": "eslint ./src/**/*.js --fix",
+    "eslint": "eslint './src/**/*.js'",
+    "eslint:fix": "eslint './src/**/*.js' --fix",
     "prettier": "prettier ./src/**/*.{css,less,scss,sass,json} --write",
     "lint": "run-s eslint:fix prettier",
     "lint-staged": "lint-staged"

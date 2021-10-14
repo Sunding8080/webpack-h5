@@ -12,7 +12,14 @@ const createInstance = () => {
   /**
    * 修改请求配置
    */
-  instance.interceptors.request.use((config) => config)
+  instance.interceptors.request.use(
+    (config) => config,
+    (error) => {
+      const { message } = error
+      console.log(message)
+      Promise.reject(error)
+    },
+  )
 
   /**
    * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
