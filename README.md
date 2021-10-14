@@ -8,14 +8,20 @@
 # 安装依赖
 yarn install
 
-# 开发模式：在本地启动一个带热重载的服务，使用mocker-api模拟请求
+# 开发模式：在本地启动一个带热重载的服务
 yarn dev
+
+# 开发模式：在本地启动一个带热重载的服务，使用mocker-api模拟请求
+yarn dev:mock
 
 # 开发模式：在本地启动一个带热重载的服务，使用proxy请求代理
 yarn dev:proxy
 
-# 开发模式：在本地启动一个带热重载的服务，使用mocker-api模拟请求，并使用eslint做校验
+# 开发模式：在本地启动一个带热重载的服务，并使用eslint做校验
 yarn dev:eslint
+
+# 开发模式：在本地启动一个带热重载的服务，使用mocker-api模拟请求，并使用eslint做校验
+yarn dev:mock:eslint
 
 # 开发模式：在本地启动一个带热重载的服务，使用proxy请求代理，并使用eslint做校验
 yarn dev:proxy:eslint

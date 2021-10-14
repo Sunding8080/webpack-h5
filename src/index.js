@@ -1,4 +1,5 @@
 import request from 'assets/js/request'
+import 'assets/style/index.css'
 
 /* eslint-disable-next-line */
 console.log('processEnv:', processEnv)
@@ -12,6 +13,4 @@ request({
 })
 
 // 热更新
-if (module && module.hot) {
-  module.hot.accept()
-}
+module?.hot?.accept()
