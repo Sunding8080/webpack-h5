@@ -4,7 +4,10 @@ const path = require('path')
 const apiMocker = require('mocker-api')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
-const isProxy = Boolean(process.env.RUN_PROXY) // 判断是否用代理
+const RUN_API = process.env.RUN_API
+
+const isProxy = RUN_API === 'proxy' // 判断是否用代理
+const isMock = RUN_API === 'mock' // 判断是否用mocker-api模拟请求
 const isEslint = Boolean(process.env.RUN_ESLINT) // 开发时开启eslint校验
 
 const devWebpackConfig = {
@@ -29,7 +32,7 @@ const devWebpackConfig = {
       : {},
 
     onBeforeSetupMiddleware(params) {
-      if (!isProxy) {
+      if (isMock) {
         const { app } = params
         apiMocker(app, path.resolve(__dirname, '../mock/mocker.js'))
       }

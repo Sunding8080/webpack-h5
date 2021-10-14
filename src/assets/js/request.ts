@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const initRequest = () => {
+console.log('axios, processEnv:', processEnv)
+
+const createInstance = () => {
   const instance = axios.create({
     // baseURL, 请求前缀
     timeout: 30000,
@@ -9,37 +11,40 @@ const initRequest = () => {
     },
   })
 
-  // instance.interceptors.request.use(function (config) {
-  //   return config;
-  // });
+  /**
+   * 修改请求配置
+   */
+  instance.interceptors.request.use((config) => config)
 
+  /**
+   * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
+   */
   instance.interceptors.response.use(
-    (response) => {
-      if (response.status === 200) {
-        return response
+    (res) => {
+      const { status, data } = res
+      if (status === 200) {
+        // 可以在这里统一处理200状态码下的非正常情况
+        if (data?.code !== 0) {
+          console.log('接口错误')
+        }
+        return data
       }
-      return Promise.reject(response)
+      console.log('服务异常')
+      return Promise.reject(status)
     },
-    async (error) => Promise.reject(error)
+    (error) => {
+      // 请求超时或者404时
+      const { message } = error
+      console.log(message)
+      Promise.reject(error)
+    },
   )
+
+  return instance
 }
 
-const request = async (params) => {
-  initRequest()
+const instance = createInstance()
 
-  return instance.request(params).then((rs) => {
-    if (rs.data && rs.data.code === 0) {
-      return rs.data.data
-    }
-
-    // 做个兼容
-    const data = rs.data || {}
-    data.toString = function toString() {
-      return data.msg || ''
-    }
-
-    return Promise.reject(data)
-  })
-}
+const request = (params) => instance.request(params)
 
 export default request

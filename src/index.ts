@@ -1,4 +1,5 @@
 import request from 'assets/js/request'
+import 'assets/style/index.css'
 
 /* eslint-disable-next-line */
 console.log('processEnv:', processEnv)
