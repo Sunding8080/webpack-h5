@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "assets/*": ["src/assets/*"]
+    },
+    "typeRoots": ["node_modules/@types/", "./src/types/", "./src/"],
+    "types": ["node"],
+    "lib": ["ESNext"]
+  },
+  "exclude": ["./server", "node_modules"]
+}

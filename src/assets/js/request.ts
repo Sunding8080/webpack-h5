@@ -1,19 +1,13 @@
 import axios from 'axios'
 
-const instance = axios.create({
-  // baseURL, 请求前缀
-  timeout: 30000,
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-  },
-})
-
-let inited = false
-
 const initRequest = () => {
-  if (inited) {
-    return
-  }
+  const instance = axios.create({
+    // baseURL, 请求前缀
+    timeout: 30000,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  })
 
   // instance.interceptors.request.use(function (config) {
   //   return config;
@@ -26,10 +20,8 @@ const initRequest = () => {
       }
       return Promise.reject(response)
     },
-    async (error) => Promise.reject(error),
+    async (error) => Promise.reject(error)
   )
-
-  inited = true
 }
 
 const request = async (params) => {
