@@ -10,8 +10,6 @@ const isProxy = RUN_API === 'proxy' // 判断是否用代理
 const isMock = RUN_API === 'mock' // 判断是否用mocker-api模拟请求
 const isEslint = Boolean(process.env.RUN_ESLINT) // 开发时开启eslint校验
 
-console.log('isEslint:', isEslint)
-
 const devWebpackConfig = {
   devServer: {
     open: true, // 启用服务时打开浏览器
