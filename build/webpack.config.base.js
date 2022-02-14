@@ -121,9 +121,9 @@ module.exports = {
 
     new webpack.DefinePlugin({
       processEnv: {
-        RUN_ENV: `"${process.env.RUN_ENV}"`,
-        RUN_API: `"${process.env.RUN_API}"`,
-        RUN_ESLINT: `"${process.env.RUN_ESLINT}"`,
+        RUN_ENV: `"${process.env.RUN_ENV || ''}"`,
+        RUN_API: `"${process.env.RUN_API || ''}"`,
+        RUN_ESLINT: `"${process.env.RUN_ESLINT || ''}"`,
       },
     }),
 
