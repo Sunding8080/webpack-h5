@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import PageRoutes from './router'
 import { useRoutes } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 const Home = lazy(
   () => import(/* webpackChunkName: "page-home" */ '@/pages/home')
@@ -16,9 +17,11 @@ const Login = lazy(
 
 const App = () => {
   return (
-    <Suspense fallback={<div></div>}>
-      <PageRoutes></PageRoutes>
-    </Suspense>
+    <RecoilRoot>
+      <Suspense fallback={<div>loading....</div>}>
+        <PageRoutes></PageRoutes>
+      </Suspense>
+    </RecoilRoot>
   )
 }
 
