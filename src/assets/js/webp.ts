@@ -10,7 +10,7 @@ import {
  * 判断是否支持webp
  * @returns
  */
-const checkSupportWebp = function () {
+const checkSupportWebp = () => {
   try {
     return (
       document

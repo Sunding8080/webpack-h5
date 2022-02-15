@@ -1,4 +1,7 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import request from 'assets/js/request'
+import App from './App'
 import 'assets/style/index.css'
 
 /* eslint-disable-next-line */
@@ -14,22 +17,7 @@ if (processEnv.RUN_API) {
   })
 }
 
-const obj = {
-  name: 'sunding',
-  age: 27,
-}
-
-Object.entries(obj).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`)
-})
-
-Promise.resolve(true)
-  .then((res) => {
-    console.log('res:', res)
-  })
-  .finally(() => {
-    console.log('finally')
-  })
+ReactDOM.render(<App />, document.getElementById('root'))
 
 // 热更新
 // @ts-ignore

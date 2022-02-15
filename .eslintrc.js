@@ -15,7 +15,7 @@ module.exports = {
     'eslint:recommended',
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
-    // 'prettier'
+    'prettier',
   ], // 从前往后执行
   plugins: ['@typescript-eslint'],
   settings: {
@@ -35,9 +35,12 @@ module.exports = {
         js: 'never',
         json: 'never',
         ts: 'never',
+        jsx: 'never',
+        tsx: 'never',
       },
     ],
 
+    'no-use-before-define': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
   },

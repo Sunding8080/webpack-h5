@@ -13,10 +13,12 @@
     "noImplicitAny": false,
     "paths": {
       "@/*": ["src/*"],
-      "assets/*": ["src/assets/*"]
+      "assets/*": ["src/assets/*"],
+      "pages/*": ["src/pages/*"],
+      "components/*": ["src/components/*"]
     },
     "typeRoots": ["node_modules/@types/", "./src/types/", "./src/"],
     "types": ["node"],
-    "lib": ["ESNext"]
+    "jsx": "react"
   }
 }
