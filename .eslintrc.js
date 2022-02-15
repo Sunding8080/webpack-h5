@@ -15,7 +15,7 @@ module.exports = {
     'eslint:recommended',
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
+    // 'prettier',
   ], // 从前往后执行
   plugins: ['@typescript-eslint'],
   settings: {
