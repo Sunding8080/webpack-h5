@@ -17,7 +17,7 @@
     "build": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.js",
     "analyse": "cross-env RUN_ENV=production webpack build --config=./build/webpack.config.prod.analyse.js",
     "eslint": "eslint 'src/**/*.ts'",
-    "eslint:fix": "eslint 'src/**/*.ts' --fix",
+    "eslint:fix": "eslint 'src/**/*.{ts,js}' --fix",
     "prettier": "prettier ./src/**/*.{css,less,scss,sass,json} --write",
     "lint": "run-s eslint:fix prettier",
     "lint-staged": "lint-staged"
@@ -68,8 +68,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "dayjs": "^1.10.6",
+    "dayjs": "^1.10.7",
     "lint-staged": "10.2.9",
+    "loadsh": "^0.0.4",
+    "query-string": "^7.1.1",
     "webpack-dev-server": "^4.0.0-rc.0"
   },
   "husky": {
