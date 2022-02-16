@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import request from 'assets/js/request'
 import App from './App'
 import 'assets/style/index.css'
+import 'antd/dist/antd.css'
 
 /* eslint-disable-next-line */
 console.log('processEnv:', processEnv)

@@ -45,13 +45,27 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
       },
       {
         test: /\.styl(us)?$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'stylus-loader',
         ],
@@ -60,7 +74,12 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'less-loader',
         ],
@@ -69,7 +88,12 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'sass-loader',
         ],
