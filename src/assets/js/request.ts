@@ -1,22 +1,15 @@
-import axios from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-const createInstance = () => {
-  const instance = axios.create({
-    // baseURL, 请求前缀
-    timeout: 30000,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
-  })
+export const createInstance = (axiosConfig: AxiosRequestConfig) => {
+  const instance = axios.create(axiosConfig)
 
   /**
    * 修改请求配置
    */
   instance.interceptors.request.use(
-    (config) => config,
-    (error) => {
-      const { message } = error
-      console.log(message)
+    (config: AxiosRequestConfig) => config,
+    (error: AxiosError) => {
+      console.log(error)
       Promise.reject(error)
     },
   )
@@ -25,7 +18,7 @@ const createInstance = () => {
    * 状态码(validateStatus) >=200 <300 执行回调1，否则走异常回调2
    */
   instance.interceptors.response.use(
-    (res) => {
+    (res: AxiosResponse) => {
       const { status, data } = res
       if (status === 200) {
         // 可以在这里统一处理200状态码下的非正常情况
@@ -37,7 +30,7 @@ const createInstance = () => {
       console.log('服务异常')
       return Promise.reject(status)
     },
-    (error) => {
+    (error: AxiosError) => {
       // 请求超时或者404时
       const { message } = error
       console.log(message)
@@ -48,8 +41,12 @@ const createInstance = () => {
   return instance
 }
 
-const instance = createInstance()
+const instance = createInstance({
+  // baseURL, 请求前缀
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
+})
 
-const request = (params) => instance.request(params)
-
-export default request
+export default instance
