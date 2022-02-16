@@ -11,7 +11,7 @@ export const createInstance = (axiosConfig: AxiosRequestConfig) => {
     (error: AxiosError) => {
       console.log(error)
       Promise.reject(error)
-    },
+    }
   )
 
   /**
@@ -35,7 +35,7 @@ export const createInstance = (axiosConfig: AxiosRequestConfig) => {
       const { message } = error
       console.log(message)
       Promise.reject(error)
-    },
+    }
   )
 
   return instance
