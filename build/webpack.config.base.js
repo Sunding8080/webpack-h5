@@ -28,6 +28,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '../src'),
+      pages: path.resolve(__dirname, '../src/pages'),
       components: path.resolve(__dirname, '../src/components'),
       assets: path.resolve(__dirname, '../src/assets'),
     },
@@ -44,13 +45,27 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
       },
       {
         test: /\.styl(us)?$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'stylus-loader',
         ],
@@ -59,7 +74,12 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'less-loader',
         ],
@@ -68,7 +88,12 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'sass-loader',
         ],
@@ -121,7 +146,9 @@ module.exports = {
 
     new webpack.DefinePlugin({
       processEnv: {
-        RUN_ENV: `"${process.env.RUN_ENV}"`,
+        RUN_ENV: `"${process.env.RUN_ENV || ''}"`,
+        RUN_API: `"${process.env.RUN_API || ''}"`,
+        RUN_ESLINT: `"${process.env.RUN_ESLINT || ''}"`,
       },
     }),
 
