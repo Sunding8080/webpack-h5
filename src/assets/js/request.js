@@ -17,8 +17,8 @@ const createInstance = () => {
     (error) => {
       const { message } = error
       console.log(message)
-      Promise.reject(error)
-    },
+      return Promise.reject(error)
+    }
   )
 
   /**
@@ -33,16 +33,17 @@ const createInstance = () => {
           console.log('接口错误')
         }
         return data
+      } else {
+        console.log('服务异常')
+        return Promise.reject(status)
       }
-      console.log('服务异常')
-      return Promise.reject(status)
     },
     (error) => {
       // 请求超时或者404时
       const { message } = error
       console.log(message)
-      Promise.reject(error)
-    },
+      return Promise.reject(error)
+    }
   )
 
   return instance
