@@ -7,6 +7,10 @@ declare module '*.bmp'
 declare module '*.bmp'
 declare module '*.css'
 declare module '*.less'
+declare module '*.scss'
+declare module '*.sass'
+declare module '*.module.css'
+declare module '*.module.less'
 
 declare const processEnv: {
   RUN_ENV: string
