@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
   },
@@ -14,8 +14,10 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'airbnb-base',
-    // 'prettier'
-  ],
+    'plugin:@typescript-eslint/recommended',
+    // 'prettier',
+  ], // 从前往后执行
+  plugins: ['@typescript-eslint'],
   settings: {
     'import/resolver': {
       webpack: {
@@ -32,8 +34,15 @@ module.exports = {
       {
         js: 'never',
         json: 'never',
+        ts: 'never',
+        jsx: 'never',
+        tsx: 'never',
       },
     ],
+
+    'no-use-before-define': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
   globals: {
     processEnv: 'readonly',
