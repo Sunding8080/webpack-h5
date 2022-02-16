@@ -10,7 +10,7 @@ export const createInstance = (axiosConfig: AxiosRequestConfig) => {
     (config: AxiosRequestConfig) => config,
     (error: AxiosError) => {
       console.log(error)
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   )
 
@@ -26,15 +26,16 @@ export const createInstance = (axiosConfig: AxiosRequestConfig) => {
           console.log('接口错误')
         }
         return data
+      } else {
+        console.log('服务异常')
+        return Promise.reject(status)
       }
-      console.log('服务异常')
-      return Promise.reject(status)
     },
     (error: AxiosError) => {
       // 请求超时或者404时
       const { message } = error
       console.log(message)
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   )
 
