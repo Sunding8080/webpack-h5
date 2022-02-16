@@ -18,13 +18,8 @@ export const myAge = selector({
 
 export const myName = selector({
   key: 'myName',
-  get: async ({ get }) => {
-    const name = await new Promise((resolve) => {
-      const Info = get(info)
-      setTimeout(() => {
-        resolve(Info.name || '')
-      }, 3000)
-    })
-    return name
+  get: ({ get }) => {
+    const Info = get(info)
+    return Info.name
   },
 })
