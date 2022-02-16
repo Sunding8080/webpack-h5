@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { notification } from 'antd'
 
 export const createInstance = (axiosConfig: AxiosRequestConfig) => {
   const instance = axios.create(axiosConfig)
@@ -23,18 +24,26 @@ export const createInstance = (axiosConfig: AxiosRequestConfig) => {
       if (status === 200) {
         // 可以在这里统一处理200状态码下的非正常情况
         if (data?.code !== 0) {
-          console.log('接口错误')
+          notification.error({
+            message: '接口错误',
+            description: data.msg,
+          })
         }
         return data
       } else {
-        console.log('服务异常')
+        notification.error({
+          message: '网络或接口错误',
+          description: `http状态码：${status}`,
+        })
         return Promise.reject(status)
       }
     },
     (error: AxiosError) => {
       // 请求超时或者404时
-      const { message } = error
-      console.log(message)
+      notification.error({
+        message: '网络错误',
+        description: error.message,
+      })
       return Promise.reject(error)
     }
   )
